@@ -1,20 +1,12 @@
 import java.util.*;
 
-public class Day5_part1
+public class Day5_part2
 {
-    public static String ReverseString(String input)
-    {
-        String tmp = "";
-        for (int i = input.length() - 1; i >= 0 ; --i)
-            tmp += input.charAt(i);
-        return tmp;
-    }
-
     public static String[] Move(String from, String to, int amount)
     {
         if (from.length() - amount < 0) amount = from.length();
 
-        to += ReverseString(from.substring(from.length() - amount));
+        to += from.substring(from.length() - amount);
         from = from.substring(0, from.length() - amount);
 
         return new String[] {from, to};
