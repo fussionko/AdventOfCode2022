@@ -12,13 +12,6 @@ public class Day7_part1
         return currentDir.data;
     }    
 
-    public static void PrintTree(Node treeStart)
-    {
-        System.out.println("P:" + treeStart.parent.name + "|" + treeStart.name + "|" + treeStart.data);
-        for (Node dir : treeStart.children)
-            PrintTree(dir);
-    }
-
     public static int SumLower(Node currentDir)
     {
         int current = 0;

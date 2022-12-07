@@ -11,24 +11,16 @@ public class Day7_part2
         return currentDir.data;
     }    
 
-    public static void PrintTree(Node treeStart)
+    public static int FindLowest(Node currentDir, int search, int space)
     {
-        System.out.println("P:" + treeStart.parent.name + "|" + treeStart.name + "|" + treeStart.data);
-        for (Node dir : treeStart.children)
-            PrintTree(dir);
-    }
-
-    public static int FindLowest(Node currentDir, int search)
-    {
-        
-        int min = Integer.MAX_VALUE;
+        if (space + currentDir.data < search) return Integer.MAX_VALUE;
+        int k = space + currentDir.data >= search ? space + currentDir.data - search : Integer.MAX_VALUE;     
         for (Node dir : currentDir.children)
         {
-            int tmp = FindLowest(dir, search);
-            if (tmp < min) min = tmp;
+            int tmp = FindLowest(dir, search, space);
+            if (tmp < k) k = tmp;
         }
-        if (currentDir.data > search) return currentDir.data;
-        return min;
+        return k;
     }
 
     public static void main(String[] args)
@@ -45,11 +37,8 @@ public class Day7_part2
         while (sc.hasNextLine())
         {
             String command = sc.nextLine();
-            
-            if (command.equals("$ cd /")) 
-            {
-                currentDir = head;
-            }   
+            if (command.equals("delete")) break;
+            if (command.equals("$ cd /"))  currentDir = head; 
             else if (command.contains("dir"))
             {
                 Node dir = new Node();
@@ -59,10 +48,7 @@ public class Day7_part2
                 dir.children = new ArrayList<Node>();
                 currentDir.children.add(dir);
             }
-            else if (command.equals("$ cd .."))
-            {
-                currentDir = currentDir.parent;
-            }
+            else if (command.equals("$ cd ..")) currentDir = currentDir.parent;
             else if (command.contains("$ cd"))
             {       
                 String compare = command.split(" ")[2];
@@ -71,18 +57,12 @@ public class Day7_part2
                         currentDir = children;
             }
             else if (command.matches(".*\\d.*"))
-            {
-                
                 currentDir.data += Integer.parseInt(command.split(" ")[0]);
-            }
         }
         
-        FillData(head);
-        
-        //PrintTree(head);
+        FillData(head); 
         System.out.println(head.data);
-        System.out.println(70000000 - head.data);
-        System.out.println(FindLowest(head, 70000000 - head.data));
+        System.out.println((FindLowest(head, 30000000, 70000000 - head.data) - 70000000 + head.data + 30000000));
 
     }
 }
