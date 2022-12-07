@@ -1,8 +1,7 @@
 import java.util.*;
 
-public class Day7_part1
+public class Day7_part2
 {
-
     public static int FillData(Node currentDir)
     {
         if (currentDir.children.size() == 0) return currentDir.data;
@@ -19,17 +18,17 @@ public class Day7_part1
             PrintTree(dir);
     }
 
-    public static int SumLower(Node currentDir)
+    public static int FindLowest(Node currentDir, int search)
     {
-        int current = 0;
-
+        
+        int min = Integer.MAX_VALUE;
         for (Node dir : currentDir.children)
-            if (dir.data <= 100000)
-                current += dir.data + SumLower(dir);
-            else 
-                current += SumLower(dir);
-
-        return current;
+        {
+            int tmp = FindLowest(dir, search);
+            if (tmp < min) min = tmp;
+        }
+        if (currentDir.data > search) return currentDir.data;
+        return min;
     }
 
     public static void main(String[] args)
@@ -80,8 +79,10 @@ public class Day7_part1
         
         FillData(head);
         
-        PrintTree(head);
-        System.out.println(SumLower(head));
+        //PrintTree(head);
+        System.out.println(head.data);
+        System.out.println(70000000 - head.data);
+        System.out.println(FindLowest(head, 70000000 - head.data));
 
     }
 }
