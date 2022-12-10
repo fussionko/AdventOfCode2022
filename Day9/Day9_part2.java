@@ -2,21 +2,10 @@ import java.util.*;
 
 public class Day9_part2
 {
-    public static void ProcessMove(char move, int amount, Cord[] body, int head)
-    {
-        if (move == 'U')
-            body[head].y += amount;
-        else if (move == 'D')
-            body[head].y -= amount;
-        else if (move == 'L')
-            body[head].x -= amount;
-        else if (move == 'R')
-            body[head].x += amount;
-    }
-
     public static void MoveBody(Cord[] body, int head, int tail)
     {
-        if (Math.abs(body[head].x - body[tail].x) <= 1 && Math.abs(body[head].y - body[tail].y) <= 1) return;
+        if (Math.abs(body[head].x - body[tail].x) <= 1 && Math.abs(body[head].y - body[tail].y) <= 1) 
+            return;
 
         if (Math.abs(body[head].x - body[tail].x) > 1 && Math.abs(body[head].y - body[tail].y) > 1)
         {
@@ -49,26 +38,25 @@ public class Day9_part2
         while (sc.hasNextLine())
         {
             String move = sc.nextLine();
-            if (move == "") break;
             int amount = Integer.parseInt(move.split(" ")[1]);
 
             for (int k = 0; k < amount; ++k)
             {
-                ProcessMove(move.charAt(0), 1, body, 0);
-                for (int i = 1; i < body.length; ++i)
-                {                   
-                    MoveBody(body, i - 1, i);
-                        //     for (Cord c : body)
-                        // System.out.println(c.x + "|" + c.y);  
-                        // System.out.println("-");
+                switch (move.charAt(0))
+                {
+                    case ('U'): ++body[0].y; break;
+                    case ('D'): --body[0].y; break;
+                    case ('L'): --body[0].x; break;
+                    case ('R'): ++body[0].x; break;
                 }
-                // System.out.println("-------------------" + k); 
+
+                for (int i = 1; i < body.length; ++i)             
+                    MoveBody(body, i - 1, i);
+
                 positions.add(new Cord(body[9].x, body[9].y));
             }
         }
 
-        // for (Cord c : positions)
-        //     System.out.println(c.x + "|" + c.y);    
         System.out.println(positions.size());
     }
 }

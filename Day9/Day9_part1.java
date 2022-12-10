@@ -26,8 +26,16 @@ public class Day9_part1
         while (sc.hasNextLine())
         {
             String move = sc.nextLine();
-            ProcessMove(move.charAt(0), Integer.parseInt(move.split(" ")[1]), head);
-            
+            int amount = Integer.parseInt(move.split(" ")[1]);
+
+            switch (move.charAt(0))
+            {
+                case ('U'): head.y += amount; break;
+                case ('D'): head.y -= amount; break;
+                case ('L'): head.x -= amount; break;
+                case ('R'): head.x += amount; break;
+            }
+
             if (head.Distance(tail) > 1)
             {
                 for (int x = tail.x + 1; x < head.x; ++x)
