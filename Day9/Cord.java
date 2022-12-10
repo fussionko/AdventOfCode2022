@@ -10,11 +10,6 @@ class Cord
         this.y = y;
     }
 
-    public int Distance(Cord comp)
-    {
-        return (int)Math.sqrt(Math.pow(comp.x - this.x, 2) + Math.pow(comp.y - this.y, 2));
-    }
-
     @Override
     public int hashCode()
     {
