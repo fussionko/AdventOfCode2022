@@ -2,18 +2,6 @@ import java.util.*;
 
 public class Day9_part1
 {
-    public static void ProcessMove(char move, int amount, Cord head)
-    {
-        if (move == 'U')
-            head.y += amount;
-        else if (move == 'D')
-            head.y -= amount;
-        else if (move == 'L')
-            head.x -= amount;
-        else if (move == 'R')
-            head.x += amount;
-    }
-
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
