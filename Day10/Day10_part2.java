@@ -26,13 +26,11 @@ public class Day10_part2
         Scanner sc = new Scanner(System.in);
 
         int trackCycle = 0, spritePos = 0;
-
         char[][] crc = new char[6][40];
 
         while (sc.hasNextLine())
         {
             String cycle = sc.nextLine();
-            if (cycle == "") break;
             
             ++trackCycle;
             Draw(crc, trackCycle, spritePos);
