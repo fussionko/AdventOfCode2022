@@ -59,8 +59,7 @@ public class Day11_part2
                     maxInscpections[0] = inspections[i];
                 else maxInscpections[1] = inspections[i];
             }     
-
-
+            
         System.out.println(maxInscpections[0] * maxInscpections[1]);
     }
 }

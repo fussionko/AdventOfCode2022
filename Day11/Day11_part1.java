@@ -50,13 +50,11 @@ public class Day11_part1
 
         long[] maxInscpections = {inspections[0], inspections[1]};
         for (int i = 2; i < inspections.length; ++i)
-        {
             if (inspections[i] > maxInscpections[0] || inspections[i] > maxInscpections[1])
             {
                 if (maxInscpections[1] > maxInscpections[0]) maxInscpections[0] = inspections[i];
                 else maxInscpections[1] = inspections[i];
             }     
-        }
 
         System.out.println(maxInscpections[0] * maxInscpections[1]);
     }
